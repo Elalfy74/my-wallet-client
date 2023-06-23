@@ -1,21 +1,28 @@
 import { useState } from 'react';
-import { Stepper, Paper } from '@mantine/core';
+import { Stepper, Paper, Alert, Button, Stack } from '@mantine/core';
+import { Link } from 'react-router-dom';
 import { ChooseContact } from './choose-contact';
 import { Payment } from './payment';
 import { Verify } from './verify';
 
 export function TransactionStepper({
+  active,
+  nextStep,
+  setActive,
   handleTransPay,
+  error,
+  isLoading,
 }: {
+  active: number;
+  nextStep: () => void;
+  setActive: React.Dispatch<React.SetStateAction<number>>;
   handleTransPay: (createTans: CreateTransaction) => void;
+  error: string;
+  isLoading: boolean;
 }) {
   const [trans, setTrans] = useState<CreateTransaction | null>(null);
 
   const [selectedContact, setContact] = useState<null | FoundContact>(null);
-  const [active, setActive] = useState(0);
-
-  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
-  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   const handleTrans = (data: CreatePaymentInput) => {
     setTrans({
@@ -31,6 +38,11 @@ export function TransactionStepper({
   }
   return (
     <Paper shadow="xs" withBorder p="xl" radius="md">
+      {error && (
+        <Alert mb={4} color="red">
+          {error}{' '}
+        </Alert>
+      )}
       <Stepper active={active} onStepClick={setActive} breakpoint="sm" allowNextStepsSelect={false}>
         <Stepper.Step label="Select a contact">
           <ChooseContact handleContact={handleContact} />
@@ -39,9 +51,21 @@ export function TransactionStepper({
           <Payment contact={selectedContact!} handleTrans={handleTrans} />
         </Stepper.Step>
         <Stepper.Step label="Complete">
-          <Verify contact={selectedContact!} trans={trans} handleTransPay={handleTransPay} />
+          <Verify
+            contact={selectedContact!}
+            trans={trans}
+            handleTransPay={handleTransPay}
+            isLoading={isLoading}
+          />
         </Stepper.Step>
-        <Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
+        <Stepper.Completed>
+          <Stack>
+            Completed, click back button to get to Home
+            <Button component={Link} to="/">
+              Back
+            </Button>
+          </Stack>
+        </Stepper.Completed>
       </Stepper>
     </Paper>
   );

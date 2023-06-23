@@ -1,6 +1,7 @@
 type CurrentUser = {
   firstName: string;
   lastName: string;
+  avatar: string;
 };
 
 type LoginInput = {
@@ -46,4 +47,17 @@ type CreatePaymentInput = {
 
 type CreateTransaction = CreatePaymentInput & {
   receiverName: string;
+};
+
+type Transaction = {
+  amount: number;
+  senderName?: string;
+  receiverName?: string;
+  createdAt: Date;
+};
+
+type TransactionRes = {
+  name: string;
+  receivedTransactions: ReceivedTransaction[];
+  sentTransactions: SentTransaction[];
 };

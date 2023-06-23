@@ -1,10 +1,10 @@
 import { instance } from '@/lib/axios';
 
-export function login(loginInput: LoginInput): Promise<CurrentUser> {
+export function login(loginInput: LoginInput): Promise<{ data: CurrentUser }> {
   return instance.post('/auth/login', loginInput);
 }
 
-export function register(registerInput: RegisterInput): Promise<CurrentUser> {
+export function register(registerInput: RegisterInput): Promise<{ data: CurrentUser }> {
   return instance.post('/auth/register', registerInput);
 }
 

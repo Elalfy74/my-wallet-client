@@ -26,7 +26,7 @@ export const useRegisterForm = () => {
 
   const { mutate, isLoading, error } = useMutation({
     mutationFn: (registerInput: RegisterInput) => registerUser(registerInput),
-    onSuccess: (user) => login(user),
+    onSuccess: (user) => login(user.data),
   });
 
   const { control, handleSubmit } = useForm<RegisterInput>({

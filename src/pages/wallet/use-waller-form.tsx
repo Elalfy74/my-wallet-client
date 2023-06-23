@@ -6,7 +6,7 @@ import { AxiosError } from 'axios';
 import { createWallet } from '@/apis/wallets';
 
 const schema = z.object({
-  name: z.string().regex(/^[A-Za-z]\w{4,14}$/),
+  name: z.string().regex(/^[A-Za-z]\w{4,14}$/, 'name must be at least 5 characters'),
 });
 
 export const useWalletForm = () => {

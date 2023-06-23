@@ -2,12 +2,12 @@ import {
   createStyles,
   Navbar,
   Group,
-  Code,
   getStylesRef,
   rem,
   Title,
   Button,
   Anchor,
+  Avatar,
 } from '@mantine/core';
 import { IconLogout, IconHome, IconUser, IconWallet } from '@tabler/icons-react';
 import { Link, NavLink } from 'react-router-dom';
@@ -72,14 +72,14 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
   { link: '/', label: 'Home', icon: IconHome },
-  // { link: '/account', label: 'Account', icon: IconUser },
   { link: '/wallet', label: 'Wallet', icon: IconWallet },
 ];
 
-export function MainNavbar() {
+export function MainNavbar({ close }: { close?: () => void }) {
   const { classes, cx } = useStyles();
+  const handleClick = close || (() => {});
 
-  const logoutUser = useAuth((state) => state.logoutUser);
+  const { logoutUser, currentUser } = useAuth();
 
   const { mutate } = useMutation({
     mutationFn: logout,
@@ -91,6 +91,7 @@ export function MainNavbar() {
       className={({ isActive }) => cx(classes.link, { [classes.linkActive]: isActive })}
       to={item.link}
       key={item.label}
+      onClick={handleClick}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>
@@ -98,16 +99,19 @@ export function MainNavbar() {
   ));
 
   return (
-    <Navbar width={{ sm: 300 }} p="md">
+    <Navbar width={{ lg: 300 }} p="md">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
-          <Title order={3}>My Wallet</Title>
+          <Avatar src={currentUser?.avatar} alt="avatar" />
+          <Title order={3} tt="capitalize">
+            {currentUser?.firstName} {currentUser?.lastName}
+          </Title>
         </Group>
         {links}
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <Button fullWidth component={Link} to="/new">
+        <Button fullWidth component={Link} to="/new" onClick={handleClick}>
           $New
         </Button>
         <Anchor className={classes.link} component="button" w="100%" onClick={() => mutate()}>

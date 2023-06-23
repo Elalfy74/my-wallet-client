@@ -1,11 +1,13 @@
-import { Paper, Stack, Title, Text, Badge, Group, Button } from '@mantine/core';
+import { Paper, Stack, Title, Text, Badge, Group, Button, Loader } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 export function Verify({
+  isLoading,
   contact,
   trans,
   handleTransPay,
 }: {
+  isLoading: boolean;
   contact: FoundContact;
   trans: CreateTransaction | null;
   handleTransPay: (createTans: CreateTransaction) => void;
@@ -41,7 +43,9 @@ export function Verify({
             Cancel
           </Button>
 
-          <Button onClick={() => handleTransPay(trans!)}>Verify</Button>
+          <Button onClick={() => handleTransPay(trans!)}>
+            {isLoading ? <Loader variant="dots" color="white" /> : 'Verify'}
+          </Button>
         </Group>
       </Stack>
     </Paper>
