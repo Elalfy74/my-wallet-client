@@ -44,6 +44,6 @@ type CreatePaymentInput = {
   note?: string;
 };
 
-type Transaction = CreatePaymentInput & {
-  receiver: string;
+type CreateTransaction = CreatePaymentInput & {
+  receiverName: string;
 };

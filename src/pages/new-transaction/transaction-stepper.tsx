@@ -4,8 +4,12 @@ import { ChooseContact } from './choose-contact';
 import { Payment } from './payment';
 import { Verify } from './verify';
 
-export function TransactionStepper() {
-  const [trans, setTrans] = useState<Transaction | null>(null);
+export function TransactionStepper({
+  handleTransPay,
+}: {
+  handleTransPay: (createTans: CreateTransaction) => void;
+}) {
+  const [trans, setTrans] = useState<CreateTransaction | null>(null);
 
   const [selectedContact, setContact] = useState<null | FoundContact>(null);
   const [active, setActive] = useState(0);
@@ -15,7 +19,7 @@ export function TransactionStepper() {
 
   const handleTrans = (data: CreatePaymentInput) => {
     setTrans({
-      receiver: selectedContact!.name,
+      receiverName: selectedContact!.name,
       ...data,
     });
     nextStep();
@@ -35,7 +39,7 @@ export function TransactionStepper() {
           <Payment contact={selectedContact!} handleTrans={handleTrans} />
         </Stepper.Step>
         <Stepper.Step label="Complete">
-          <Verify contact={selectedContact!} trans={trans} />
+          <Verify contact={selectedContact!} trans={trans} handleTransPay={handleTransPay} />
         </Stepper.Step>
         <Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
       </Stepper>

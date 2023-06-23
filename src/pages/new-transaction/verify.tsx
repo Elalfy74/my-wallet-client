@@ -1,6 +1,15 @@
 import { Paper, Stack, Title, Text, Badge, Group, Button } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
-export function Verify({ contact, trans }: { contact: FoundContact; trans: Transaction | null }) {
+export function Verify({
+  contact,
+  trans,
+  handleTransPay,
+}: {
+  contact: FoundContact;
+  trans: CreateTransaction | null;
+  handleTransPay: (createTans: CreateTransaction) => void;
+}) {
   return (
     <Paper withBorder p={10}>
       <Title order={3} mb={10}>
@@ -28,9 +37,11 @@ export function Verify({ contact, trans }: { contact: FoundContact; trans: Trans
 
         {trans?.note && <Text>Note: {trans?.note}</Text>}
         <Group position="center">
-          <Button variant="default">Cancel</Button>
+          <Button variant="default" component={Link} to="/">
+            Cancel
+          </Button>
 
-          <Button>Verify</Button>
+          <Button onClick={() => handleTransPay(trans!)}>Verify</Button>
         </Group>
       </Stack>
     </Paper>
