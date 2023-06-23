@@ -61,9 +61,6 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
-  useEffect(() => {
-    instance.get('/auth/checkauth');
-  }, []);
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
