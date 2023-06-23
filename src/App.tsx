@@ -5,14 +5,20 @@ import { Login, Register } from './pages/auth';
 import { Home } from './pages/home/page';
 import ProtectedRoute from './protected-route';
 import PublicRoute from './public-route';
+import { MainLayout } from './layout';
 
 const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
       {
-        path: '/',
-        element: <Home />,
+        element: <MainLayout />,
+        children: [
+          {
+            path: '/',
+            element: <Home />,
+          },
+        ],
       },
     ],
   },

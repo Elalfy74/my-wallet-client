@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { AxiosError } from 'axios';
 import { register as registerUser } from '@/apis/auth';
 import { useAuth } from '@/store/auth';
 
@@ -23,28 +24,22 @@ const schema = z.object({
 export const useRegisterForm = () => {
   const login = useAuth((state) => state.login);
 
-  const mutation = useMutation({
+  const { mutate, isLoading, error } = useMutation({
     mutationFn: (registerInput: RegisterInput) => registerUser(registerInput),
     onSuccess: (user) => login(user),
   });
 
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-    reset,
-  } = useForm<RegisterInput>({
+  const { control, handleSubmit } = useForm<RegisterInput>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<RegisterInput> = async (data) => mutation.mutate(data);
+  const onSubmit: SubmitHandler<RegisterInput> = async (data) => mutate(data);
 
   return {
     control,
     onSubmit,
     handleSubmit,
-    setValue,
-    errors,
+    isLoading,
+    error: error instanceof AxiosError && error.response?.data.message,
   };
 };

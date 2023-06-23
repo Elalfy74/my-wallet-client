@@ -1,10 +1,21 @@
-import { Checkbox, Anchor, Paper, Title, Text, Container, Group, Button } from '@mantine/core';
+import {
+  Checkbox,
+  Anchor,
+  Paper,
+  Title,
+  Text,
+  Container,
+  Group,
+  Button,
+  Alert,
+  Loader,
+} from '@mantine/core';
 import { PasswordInput, TextInput } from 'react-hook-form-mantine';
 import { Link } from 'react-router-dom';
 import { useLoginForm } from './useLoginForm';
 
 export function Login() {
-  const { control, handleSubmit, onSubmit } = useLoginForm();
+  const { control, handleSubmit, onSubmit, error, isLoading } = useLoginForm();
 
   return (
     <Container size={500} my={40}>
@@ -31,6 +42,7 @@ export function Login() {
         radius="md"
         onSubmit={handleSubmit(onSubmit)}
       >
+        {error && <Alert color="red">{error}</Alert>}
         <TextInput
           label="Email"
           placeholder="you@email.com"
@@ -55,7 +67,7 @@ export function Login() {
           </Anchor>
         </Group>
         <Button fullWidth mt="xl" type="submit">
-          Log in
+          {isLoading ? <Loader variant="dots" color="white" /> : 'Log in'}
         </Button>
       </Paper>
     </Container>

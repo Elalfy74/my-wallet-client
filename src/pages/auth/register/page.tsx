@@ -1,11 +1,21 @@
-import { Container, Title, Anchor, Paper, Text, Button, SimpleGrid } from '@mantine/core';
+import {
+  Container,
+  Title,
+  Anchor,
+  Paper,
+  Text,
+  Button,
+  SimpleGrid,
+  Loader,
+  Alert,
+} from '@mantine/core';
 
 import { Link } from 'react-router-dom';
 import { NumberInput, PasswordInput, TextInput } from 'react-hook-form-mantine';
 import { useRegisterForm } from './useRegisterForm';
 
 export const Register = () => {
-  const { control, handleSubmit, errors, onSubmit } = useRegisterForm();
+  const { control, handleSubmit, onSubmit, isLoading, error } = useRegisterForm();
 
   return (
     <Container size={600} my={40}>
@@ -32,6 +42,8 @@ export const Register = () => {
         radius="md"
         onSubmit={handleSubmit(onSubmit)}
       >
+        {error && <Alert color="red">{error}</Alert>}
+
         <SimpleGrid
           cols={1}
           spacing="md"
@@ -97,7 +109,7 @@ export const Register = () => {
         />
 
         <Button fullWidth mt="xl" type="submit" size="md">
-          Register
+          {isLoading ? <Loader variant="dots" color="white" /> : 'Register'}
         </Button>
       </Paper>
     </Container>
