@@ -1,6 +1,19 @@
-import { useState } from 'react';
-import { createStyles, Navbar, Group, Code, getStylesRef, rem, Title } from '@mantine/core';
+import {
+  createStyles,
+  Navbar,
+  Group,
+  Code,
+  getStylesRef,
+  rem,
+  Title,
+  Button,
+  Anchor,
+} from '@mantine/core';
 import { IconLogout, IconHome, IconUser, IconWallet } from '@tabler/icons-react';
+import { Link, NavLink } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { logout } from '@/apis/auth';
+import { useAuth } from '@/store/auth';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -58,28 +71,30 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { link: '', label: 'Home', icon: IconHome },
-  { link: '', label: 'Account', icon: IconUser },
-  { link: '', label: 'Wallet', icon: IconWallet },
+  { link: '/', label: 'Home', icon: IconHome },
+  // { link: '/account', label: 'Account', icon: IconUser },
+  { link: '/wallet', label: 'Wallet', icon: IconWallet },
 ];
 
 export function MainNavbar() {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState('Home');
+
+  const logoutUser = useAuth((state) => state.logoutUser);
+
+  const { mutate } = useMutation({
+    mutationFn: logout,
+    onSuccess: logoutUser,
+  });
 
   const links = data.map((item) => (
-    <a
-      className={cx(classes.link, { [classes.linkActive]: item.label === active })}
-      href={item.link}
+    <NavLink
+      className={({ isActive }) => cx(classes.link, { [classes.linkActive]: isActive })}
+      to={item.link}
       key={item.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
-      }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>
-    </a>
+    </NavLink>
   ));
 
   return (
@@ -87,16 +102,18 @@ export function MainNavbar() {
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
           <Title order={3}>My Wallet</Title>
-          <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
         </Group>
         {links}
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+        <Button fullWidth component={Link} to="/new">
+          $New
+        </Button>
+        <Anchor className={classes.link} component="button" w="100%" onClick={() => mutate()}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
-        </a>
+        </Anchor>
       </Navbar.Section>
     </Navbar>
   );

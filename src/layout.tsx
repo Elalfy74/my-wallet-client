@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import { Group } from '@mantine/core';
+import { Container, Group } from '@mantine/core';
 import { MainNavbar } from './components/nav';
 
 export const MainLayout = () => (
   <Group align="start">
     <MainNavbar />
-    <Outlet />
+    <Container mt={80} sx={{ flex: 1 }}>
+      <Outlet />
+    </Container>
   </Group>
 );

@@ -3,8 +3,8 @@ import { persist } from 'zustand/middleware';
 
 interface AuthState {
   currentUser: CurrentUser | null;
-  login: (user: CurrentUser) => void;
-  logout: () => void;
+  loginUser: (user: CurrentUser) => void;
+  logoutUser: () => void;
   // checkAuth: () => Promise<void>;
 }
 
@@ -13,9 +13,9 @@ export const useAuth = create(
     (set) => ({
       currentUser: null,
 
-      login: (user) => set({ currentUser: user }),
+      loginUser: (user) => set({ currentUser: user }),
 
-      logout: () => {},
+      logoutUser: () => set({ currentUser: null }),
     }),
     {
       name: 'currentUser',

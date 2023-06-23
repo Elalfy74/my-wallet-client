@@ -6,6 +6,8 @@ import { Home } from './pages/home/page';
 import ProtectedRoute from './protected-route';
 import PublicRoute from './public-route';
 import { MainLayout } from './layout';
+import { Wallet } from './pages/wallet/page';
+import { NewTransaction } from './pages/new-transaction/page';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
           {
             path: '/',
             element: <Home />,
+          },
+          {
+            path: '/wallet',
+            element: <Wallet />,
+          },
+          {
+            path: '/new',
+            element: <NewTransaction />,
           },
         ],
       },
@@ -36,7 +46,14 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function App() {
   return (

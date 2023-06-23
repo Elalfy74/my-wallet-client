@@ -12,7 +12,7 @@ const schema = z.object({
 });
 
 export const useLoginForm = () => {
-  const login = useAuth((state) => state.login);
+  const login = useAuth((state) => state.loginUser);
 
   const { mutate, error, isLoading } = useMutation({
     mutationFn: (loginInput: LoginInput) => loginUser(loginInput),

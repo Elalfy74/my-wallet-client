@@ -7,3 +7,7 @@ export function login(loginInput: LoginInput): Promise<CurrentUser> {
 export function register(registerInput: RegisterInput): Promise<CurrentUser> {
   return instance.post('/auth/register', registerInput);
 }
+
+export function logout() {
+  return instance.post('/auth/logout');
+}

@@ -22,7 +22,7 @@ const schema = z.object({
 });
 
 export const useRegisterForm = () => {
-  const login = useAuth((state) => state.login);
+  const login = useAuth((state) => state.loginUser);
 
   const { mutate, isLoading, error } = useMutation({
     mutationFn: (registerInput: RegisterInput) => registerUser(registerInput),
