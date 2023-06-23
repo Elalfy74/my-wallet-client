@@ -1,12 +1,33 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from './ThemeProvider';
-import { Login } from './pages/auth';
+import { Login, Register } from './pages/auth';
+import { Home } from './pages/home/page';
+import ProtectedRoute from './protected-route';
+import PublicRoute from './public-route';
 
 const router = createBrowserRouter([
   {
-    path: '/auth/login',
-    element: <Login />,
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+    ],
+  },
+  {
+    element: <PublicRoute />,
+    children: [
+      {
+        path: '/auth/login',
+        element: <Login />,
+      },
+      {
+        path: '/auth/register',
+        element: <Register />,
+      },
+    ],
   },
 ]);
 const queryClient = new QueryClient();

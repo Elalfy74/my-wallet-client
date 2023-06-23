@@ -1,22 +1,13 @@
-import {
-  TextInput,
-  PasswordInput,
-  Checkbox,
-  Anchor,
-  Paper,
-  Title,
-  Text,
-  Container,
-  Group,
-  Button,
-} from '@mantine/core';
+import { Checkbox, Anchor, Paper, Title, Text, Container, Group, Button } from '@mantine/core';
+import { PasswordInput, TextInput } from 'react-hook-form-mantine';
+import { Link } from 'react-router-dom';
 import { useLoginForm } from './useLoginForm';
 
 export function Login() {
-  const { register, handleSubmit, onSubmit } = useLoginForm();
+  const { control, handleSubmit, onSubmit } = useLoginForm();
 
   return (
-    <Container size={420} my={40}>
+    <Container size={500} my={40}>
       <Title
         align="center"
         sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
@@ -25,7 +16,7 @@ export function Login() {
       </Title>
       <Text color="dimmed" size="sm" align="center" mt={5}>
         Do not have an account yet?{' '}
-        <Anchor size="sm" component="button">
+        <Anchor size="sm" component={Link} to="/auth/register">
           Create account
         </Anchor>
       </Text>
@@ -40,13 +31,22 @@ export function Login() {
         radius="md"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <TextInput label="Email" placeholder="you@email.com" required {...register('email')} />
+        <TextInput
+          label="Email"
+          placeholder="you@email.com"
+          size="md"
+          withAsterisk
+          name="email"
+          control={control}
+        />
         <PasswordInput
           label="Password"
           placeholder="Your password"
-          required
           mt="md"
-          {...register('password')}
+          size="md"
+          withAsterisk
+          name="password"
+          control={control}
         />
         <Group position="apart" mt="lg">
           <Checkbox label="Remember me" />
@@ -55,7 +55,7 @@ export function Login() {
           </Anchor>
         </Group>
         <Button fullWidth mt="xl" type="submit">
-          Sign in
+          Log in
         </Button>
       </Paper>
     </Container>
