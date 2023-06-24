@@ -11,9 +11,7 @@ export function ChooseContact({
   const [contacts, setContacts] = useState<FoundContact[]>([]);
 
   function searchQuery() {
-    if (search.trim().length >= 2) {
-      getWalletsByQuery({ search }).then((res) => setContacts(res.data));
-    }
+    getWalletsByQuery({ search }).then((res) => setContacts(res.data));
   }
 
   useEffect(() => {

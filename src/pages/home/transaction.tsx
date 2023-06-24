@@ -2,7 +2,7 @@ import { Badge, Paper, Text, Title } from '@mantine/core';
 
 export function Transaction({ type, trans }: { type: 'sent' | 'received'; trans: Transaction }) {
   return (
-    <Paper withBorder p={10}>
+    <Paper withBorder p={10} mb={20}>
       {type === 'sent' && (
         <Title order={3} display="flex" sx={{ alignItems: 'center' }}>
           You have sent{' '}

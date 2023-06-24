@@ -9,22 +9,22 @@ export function Home() {
     queryKey: ['transactions'],
   });
 
-  if(!data?.data) {
+  if (!data || !data?.data) {
     return (
-      <Stack align='center'>
-      <Title order={3}>No Transactions</Title>
+      <Stack align="center">
+        <Title order={3}>No Transactions</Title>
       </Stack>
-    )
+    );
   }
   return (
     <Box sx={{ flex: 1 }}>
-      <Tabs defaultValue="received">
+      <Tabs defaultValue="sent">
         <Tabs.List sx={{ justifyContent: 'center' }}>
-          <Tabs.Tab value="received" sx={{ flex: 1 }}>
-            Received
-          </Tabs.Tab>
           <Tabs.Tab value="sent" sx={{ flex: 1 }}>
             Sent
+          </Tabs.Tab>
+          <Tabs.Tab value="received" sx={{ flex: 1 }}>
+            Received
           </Tabs.Tab>
         </Tabs.List>
 
