@@ -35,7 +35,7 @@ export function MainHeader() {
         <Container className={classes.header}>
           <Burger opened={opened} onClick={open} size="sm" />
 
-          <Title>My Wallet</Title>
+          <Title order={3}>My Wallet</Title>
         </Container>
       </Header>
     </>
