@@ -1,4 +1,5 @@
 import { Modal, useMantineTheme } from '@mantine/core';
+
 import { CreateWalletForm } from './create-wallet-form';
 
 export function CreateWallet({ opened, close }: { opened: boolean; close: () => void }) {

@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { Badge, Button, Card, Group, Skeleton, Stack, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+
 import { getWallet } from '@/apis/wallets';
-import { CreateWallet } from './create-wallet';
+import { CreateWallet } from './components/create-wallet';
 
 export function Wallet() {
   const { data, isLoading, error } = useQuery({
@@ -24,7 +25,9 @@ export function Wallet() {
     );
   }
 
+  // Check Error
   if (error) {
+    // Show Create Wallet Components if user doesn't have a wallet
     if (error instanceof AxiosError && error.response?.status === 404) {
       return (
         <>
@@ -37,6 +40,7 @@ export function Wallet() {
         </>
       );
     }
+    // Another Error
     return (
       <Stack align="center" mt={60}>
         <Title order={2}>Something Went Wrong Please try again</Title>

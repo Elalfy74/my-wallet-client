@@ -1,10 +1,12 @@
 import { Alert, Box, Button, Loader } from '@mantine/core';
 import { IconAt } from '@tabler/icons-react';
 import { TextInput } from 'react-hook-form-mantine';
+
 import { useWalletForm } from './use-waller-form';
 
 export function CreateWalletForm() {
   const { control, error, handleSubmit, isLoading, onSubmit } = useWalletForm();
+
   return (
     <Box mt={20} component="form" onSubmit={handleSubmit(onSubmit)}>
       {error && (

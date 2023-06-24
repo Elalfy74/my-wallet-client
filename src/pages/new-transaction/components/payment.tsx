@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, Stack, Text } from '@mantine/core';
 import { NumberInput, TextInput } from 'react-hook-form-mantine';
+
 import { usePaymentForm } from './use-payment-form';
 
 export function Payment({

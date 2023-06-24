@@ -3,6 +3,7 @@ import { useAuth } from './store/auth';
 
 const PublicRoute = () => {
   const { currentUser } = useAuth();
+
   if (currentUser) {
     return <Navigate to="/" replace />;
   }

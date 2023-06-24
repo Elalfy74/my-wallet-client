@@ -1,8 +1,11 @@
 import { Box, Stack, Tabs, Title } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
+
 import { getTransactions } from '@/apis/transactions';
+
 import { Transaction } from './transaction';
 
+// This Page shows Old Transactions
 export function Home() {
   const { data } = useQuery({
     queryFn: getTransactions,

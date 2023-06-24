@@ -1,5 +1,6 @@
-import { Box, Paper, TextInput, Text, Group, Avatar, Badge } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { Box, Paper, TextInput, Text, Group, Avatar, Badge } from '@mantine/core';
+
 import { getWalletsByQuery } from '@/apis/wallets';
 
 export function ChooseContact({

@@ -2,20 +2,26 @@ import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TransactionStepper } from './transaction-stepper';
+
 import { createTransaction } from '@/apis/transactions';
 import { getWallet } from '@/apis/wallets';
 
+import { TransactionStepper } from './components/transaction-stepper';
+
 export function NewTransaction() {
-  const [active, setActive] = useState(0);
-  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const navigate = useNavigate();
 
+  // Control The Stepper
+  const [active, setActive] = useState(0);
+  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
+
+  // Get old transactions
   const { mutate, error, isLoading } = useMutation({
     mutationFn: createTransaction,
     onSuccess: () => nextStep(),
   });
 
+  // Check if the use has a wallet
   useEffect(() => {
     getWallet().catch(() =>
       navigate('/wallet', {
@@ -24,9 +30,11 @@ export function NewTransaction() {
     );
   }, []);
 
+  // Make the Trans
   function handleTransPay(createTrans: CreateTransaction) {
     mutate(createTrans);
   }
+
   return (
     <TransactionStepper
       active={active}
