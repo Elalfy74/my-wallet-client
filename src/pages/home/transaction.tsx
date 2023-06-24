@@ -33,6 +33,7 @@ export function Transaction({ type, trans }: { type: 'sent' | 'received'; trans:
           </Text>
         </Title>
       )}
+      {trans.note && <Text>Note: {trans.note}</Text>}
     </Paper>
   );
 }

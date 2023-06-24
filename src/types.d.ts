@@ -53,6 +53,7 @@ type Transaction = {
   amount: number;
   senderName?: string;
   receiverName?: string;
+  note?: string;
   createdAt: Date;
 };
 
