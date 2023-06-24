@@ -1,6 +1,5 @@
-import { Box, ScrollArea, Stack, Tabs } from '@mantine/core';
+import { Box, Stack, Tabs, Title } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
-import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
 import { getTransactions } from '@/apis/transactions';
 import { Transaction } from './transaction';
 
@@ -10,6 +9,13 @@ export function Home() {
     queryKey: ['transactions'],
   });
 
+  if(!data?.data) {
+    return (
+      <Stack align='center'>
+      <Title order={3}>No Transactions</Title>
+      </Stack>
+    )
+  }
   return (
     <Box sx={{ flex: 1 }}>
       <Tabs defaultValue="received">
@@ -23,13 +29,13 @@ export function Home() {
         </Tabs.List>
 
         <Tabs.Panel value="received" pt="xs">
-          {data?.data.receivedTransactions.map((tran) => (
+          {data?.data?.receivedTransactions.map((tran) => (
             <Transaction type="received" trans={tran} />
           ))}
         </Tabs.Panel>
 
         <Tabs.Panel value="sent" pt="xs">
-          {data?.data.sentTransactions.map((tran) => (
+          {data?.data?.sentTransactions.map((tran) => (
             <Transaction type="sent" trans={tran} />
           ))}
         </Tabs.Panel>
