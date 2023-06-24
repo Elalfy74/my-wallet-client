@@ -31,6 +31,7 @@ export function Payment({
       >
         <NumberInput
           placeholder="Amount"
+          precision={2}
           hideControls
           name="amount"
           w="80%"
