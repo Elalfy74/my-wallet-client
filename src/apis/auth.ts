@@ -11,3 +11,7 @@ export function register(registerInput: RegisterInput): Promise<{ data: CurrentU
 export function logout() {
   return instance.post('/auth/logout');
 }
+
+export function checkAuth() {
+  return instance.get('/auth/checkauth');
+}
