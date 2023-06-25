@@ -9,9 +9,9 @@ import {
   Loader,
   Alert,
 } from '@mantine/core';
-
 import { Link } from 'react-router-dom';
 import { NumberInput, PasswordInput, TextInput } from 'react-hook-form-mantine';
+
 import { useRegisterForm } from './useRegisterForm';
 
 export const Register = () => {

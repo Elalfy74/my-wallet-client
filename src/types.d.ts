@@ -59,6 +59,6 @@ type Transaction = {
 
 type TransactionRes = {
   name: string;
-  receivedTransactions: ReceivedTransaction[];
-  sentTransactions: SentTransaction[];
+  receivedTransactions: Transaction[];
+  sentTransactions: Transaction[];
 };

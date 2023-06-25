@@ -5,7 +5,6 @@ interface AuthState {
   currentUser: CurrentUser | null;
   loginUser: (user: CurrentUser) => void;
   logoutUser: () => void;
-  // checkAuth: () => Promise<void>;
 }
 
 export const useAuth = create(

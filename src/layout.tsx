@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Container, Group } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+
 import { MainNavbar } from './components/nav';
 import { MainHeader } from './components/header';
 
