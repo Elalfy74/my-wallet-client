@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { AxiosError } from 'axios';
 
-import { register as registerUser } from '@/apis/auth';
+import { register } from '@/apis/auth';
 import { useAuth } from '@/store/auth';
 
 const schema = z.object({
@@ -23,11 +23,11 @@ const schema = z.object({
 });
 
 export const useRegisterForm = () => {
-  const login = useAuth((state) => state.loginUser);
+  const loginUser = useAuth((state) => state.loginUser);
 
   const { mutate, isLoading, error } = useMutation({
-    mutationFn: (registerInput: RegisterInput) => registerUser(registerInput),
-    onSuccess: (user) => login(user.data),
+    mutationFn: register,
+    onSuccess: (user) => loginUser(user.data),
   });
 
   const { control, handleSubmit } = useForm<RegisterInput>({

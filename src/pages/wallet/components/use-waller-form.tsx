@@ -14,7 +14,7 @@ export const useWalletForm = () => {
   const queryClient = useQueryClient();
 
   const { mutate, error, isLoading } = useMutation({
-    mutationFn: (createWalletInput: CreateWalletInput) => createWallet(createWalletInput),
+    mutationFn: createWallet,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['wallet'] });
     },

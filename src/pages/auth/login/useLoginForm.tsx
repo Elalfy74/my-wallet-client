@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { AxiosError } from 'axios';
 
-import { login as loginUser } from '@/apis/auth';
+import { login } from '@/apis/auth';
 import { useAuth } from '@/store/auth';
 
 const schema = z.object({
@@ -13,11 +13,11 @@ const schema = z.object({
 });
 
 export const useLoginForm = () => {
-  const login = useAuth((state) => state.loginUser);
+  const loginUser = useAuth((state) => state.loginUser);
 
   const { mutate, error, isLoading } = useMutation({
-    mutationFn: (loginInput: LoginInput) => loginUser(loginInput),
-    onSuccess: (user) => login(user.data),
+    mutationFn: login,
+    onSuccess: (user) => loginUser(user.data),
   });
 
   const { control, handleSubmit } = useForm<LoginInput>({

@@ -18,7 +18,7 @@ export function NewTransaction() {
   // Get old transactions
   const { mutate, error, isLoading } = useMutation({
     mutationFn: createTransaction,
-    onSuccess: () => nextStep(),
+    onSuccess: nextStep,
   });
 
   // Check if the use has a wallet
