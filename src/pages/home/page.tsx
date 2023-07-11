@@ -33,13 +33,13 @@ export function Home() {
 
         <Tabs.Panel value="received" pt="xs">
           {data?.data?.receivedTransactions.map((tran) => (
-            <Transaction type="received" trans={tran} />
+            <Transaction type="received" trans={tran} key={tran.createdAt.toString()} />
           ))}
         </Tabs.Panel>
 
         <Tabs.Panel value="sent" pt="xs">
           {data?.data?.sentTransactions.map((tran) => (
-            <Transaction type="sent" trans={tran} />
+            <Transaction type="sent" trans={tran} key={tran.createdAt.toString()} />
           ))}
         </Tabs.Panel>
       </Tabs>

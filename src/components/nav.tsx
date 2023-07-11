@@ -102,9 +102,9 @@ export function MainNavbar({ close }: { close?: () => void }) {
     <Navbar width={{ lg: 300 }} p="md">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
-          <Avatar src={currentUser?.avatar} alt="avatar" />
+          <Avatar src={currentUser?.user.avatar} alt="avatar" />
           <Title order={3} tt="capitalize">
-            {currentUser?.firstName} {currentUser?.lastName}
+            {currentUser?.user.firstName} {currentUser?.user.lastName}
           </Title>
         </Group>
         {links}

@@ -1,7 +1,10 @@
 type CurrentUser = {
-  firstName: string;
-  lastName: string;
-  avatar: string;
+  accessToken: string;
+  user: {
+    firstName: string;
+    lastName: string;
+    avatar: string;
+  };
 };
 
 type LoginInput = {

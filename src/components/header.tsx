@@ -1,16 +1,5 @@
-import {
-  createStyles,
-  Header,
-  Container,
-  Group,
-  Burger,
-  rem,
-  Title,
-  Drawer,
-  Box,
-} from '@mantine/core';
+import { createStyles, Header, Container, Burger, Title, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import React from 'react';
 import { MainNavbar } from './nav';
 
 const useStyles = createStyles((theme) => ({
