@@ -20,12 +20,21 @@ const queryClient = new QueryClient({
 
 export default function App() {
   const [isLoading, setLoading] = useState(true);
-  const logoutUser = useAuth((state) => state.logoutUser);
+  const { logoutUser, currentUser, remember } = useAuth();
 
   useLayoutEffect(() => {
-    checkAuth()
-      .catch(logoutUser)
-      .then(() => setLoading(false));
+    if (currentUser) {
+      if (!remember) {
+        logoutUser();
+        setLoading(false);
+      } else {
+        checkAuth()
+          .catch(logoutUser)
+          .then(() => setLoading(false));
+      }
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   return (

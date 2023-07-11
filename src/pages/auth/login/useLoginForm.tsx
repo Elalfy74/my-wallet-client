@@ -10,21 +10,24 @@ import { useAuth } from '@/store/auth';
 const schema = z.object({
   email: z.string().email('Email is invalid').nonempty('Email is required'),
   password: z.string().min(6).max(225),
+  remember: z.boolean().default(false),
 });
 
 export const useLoginForm = () => {
   const loginUser = useAuth((state) => state.loginUser);
 
-  const { mutate, error, isLoading } = useMutation({
-    mutationFn: login,
-    onSuccess: (user) => loginUser(user.data),
-  });
-
   const { control, handleSubmit } = useForm<LoginInput>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<LoginInput> = async (data) => mutate(data);
+  const { mutate, error, isLoading } = useMutation({
+    mutationFn: login,
+    onSuccess: (user) => loginUser(user.data, !!control._formValues.remember),
+  });
+
+  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
+    mutate(data);
+  };
 
   return {
     control,

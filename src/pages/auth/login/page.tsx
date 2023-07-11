@@ -1,16 +1,5 @@
-import {
-  Checkbox,
-  Anchor,
-  Paper,
-  Title,
-  Text,
-  Container,
-  Group,
-  Button,
-  Alert,
-  Loader,
-} from '@mantine/core';
-import { PasswordInput, TextInput } from 'react-hook-form-mantine';
+import { Anchor, Paper, Title, Text, Container, Group, Button, Alert, Loader } from '@mantine/core';
+import { PasswordInput, TextInput, Checkbox } from 'react-hook-form-mantine';
 import { Link } from 'react-router-dom';
 
 import { useLoginForm } from './useLoginForm';
@@ -62,7 +51,7 @@ export function Login() {
           control={control}
         />
         <Group position="apart" mt="lg">
-          <Checkbox label="Remember me" />
+          <Checkbox label="Remember me" control={control} name="remember" />
           <Anchor component="button" size="sm">
             Forgot password?
           </Anchor>
