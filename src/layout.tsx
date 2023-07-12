@@ -6,7 +6,7 @@ import { MainNavbar } from './components/nav';
 import { MainHeader } from './components/header';
 
 export const MainLayout = () => {
-  const matches = useMediaQuery('(min-width: 1024px)');
+  const matches = useMediaQuery('(min-width: 991px)');
 
   return (
     <>
@@ -15,6 +15,7 @@ export const MainLayout = () => {
         {matches && <MainNavbar />}
         <Container
           mt={{
+            md: 50,
             lg: 80,
           }}
           sx={{ flex: 1 }}

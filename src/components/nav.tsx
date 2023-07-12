@@ -99,7 +99,16 @@ export function MainNavbar({ close }: { close?: () => void }) {
   ));
 
   return (
-    <Navbar width={{ lg: 300 }} p="md">
+    <Navbar
+      width={{ md: 300 }}
+      p="md"
+      styles={{
+        root: {
+          height:
+            'calc(100vh - var(--mantine-header-height, 0rem) - var(--mantine-footer-height, 1.5rem))',
+        },
+      }}
+    >
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
           <Avatar src={currentUser?.user.avatar} alt="avatar" />

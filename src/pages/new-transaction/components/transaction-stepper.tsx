@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Stepper, Paper, Alert, Button, Stack } from '@mantine/core';
+import { Stepper, Paper, Alert, Button, Stack, Box } from '@mantine/core';
 
 // Steps
 import { ChooseContact } from './choose-contact';
@@ -47,7 +47,18 @@ export function TransactionStepper({
           {error}
         </Alert>
       )}
-      <Stepper active={active} onStepClick={setActive} breakpoint="sm" allowNextStepsSelect={false}>
+      <Stepper
+        active={active}
+        onStepClick={setActive}
+        breakpoint="sm"
+        allowNextStepsSelect={false}
+        styles={{
+          steps: {
+            alignContent: 'center',
+            flexWrap: 'wrap',
+          },
+        }}
+      >
         <Stepper.Step label="Select a contact">
           <ChooseContact handleContact={handleContact} />
         </Stepper.Step>

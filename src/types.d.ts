@@ -66,6 +66,7 @@ type CreateTransaction = CreatePaymentInput & {
 
 // Transaction
 type Transaction = {
+  id: string;
   amount: number;
   senderName?: string;
   receiverName?: string;
@@ -73,7 +74,7 @@ type Transaction = {
   createdAt: Date;
 };
 
-type TransactionRes = {
+type TransactionResponse = {
   name: string;
   receivedTransactions: Transaction[];
   sentTransactions: Transaction[];
