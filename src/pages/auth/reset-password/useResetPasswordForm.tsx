@@ -8,10 +8,15 @@ import { useEffect } from 'react';
 
 import { checkResetLink, resetPassword } from '@/apis/auth';
 
-const schema = z.object({
-  password: z.string().min(6).max(225),
-  confirmPassword: z.string().min(6).max(225),
-});
+const schema = z
+  .object({
+    password: z.string().min(6).max(225),
+    confirmPassword: z.string().min(6).max(225),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
 
 type Params = {
   userId: string;
