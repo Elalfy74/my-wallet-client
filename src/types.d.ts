@@ -27,6 +27,11 @@ type ForgotPasswordInput = {
   email: string;
 };
 
+type ResetPasswordInput = {
+  password: string;
+  confirmPassword: string;
+};
+
 // Wallet
 type CreateWalletInput = {
   name: string;

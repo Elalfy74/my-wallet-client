@@ -9,6 +9,7 @@ import { Login, Register, ForgotPassword } from './pages/auth';
 import { Home } from './pages/home';
 import { NewTransaction } from './pages/new-transaction';
 import { Wallet } from './pages/wallet';
+import { ResetPassword } from './pages/auth/reset-password/page';
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: '/auth/forgot-password',
         element: <ForgotPassword />,
+      },
+      {
+        path: '/auth/reset-password/:userId/:token',
+        element: <ResetPassword />,
       },
     ],
   },
