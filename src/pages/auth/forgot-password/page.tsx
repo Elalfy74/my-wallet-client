@@ -1,11 +1,11 @@
-import { Anchor, Paper, Title, Text, Container, Group, Button, Alert, Loader } from '@mantine/core';
-import { PasswordInput, TextInput, Checkbox } from 'react-hook-form-mantine';
+import { Container, Title, Text, Anchor, Paper, Alert, Button, Loader } from '@mantine/core';
+import { TextInput } from 'react-hook-form-mantine';
 import { Link } from 'react-router-dom';
 
-import { useLoginForm } from './useLoginForm';
+import { useForgotPasswordForm } from './useForgotPasswordForm';
 
-export function Login() {
-  const { control, handleSubmit, onSubmit, error, isLoading } = useLoginForm();
+export const ForgotPassword = () => {
+  const { control, handleSubmit, onSubmit, error, isLoading, message } = useForgotPasswordForm();
 
   return (
     <Container size={500} my={40}>
@@ -13,10 +13,10 @@ export function Login() {
         align="center"
         sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
       >
-        Welcome back!
+        Password Recovery
       </Title>
       <Text color="dimmed" size="sm" align="center" mt={5}>
-        Do not have an account yet?{' '}
+        Enter your email to recover your password{' '}
         <Anchor size="sm" component={Link} to="/auth/register">
           Create account
         </Anchor>
@@ -33,6 +33,8 @@ export function Login() {
         onSubmit={handleSubmit(onSubmit)}
       >
         {error && <Alert color="red">{error}</Alert>}
+        {message && <Alert color="green">{message}</Alert>}
+
         <TextInput
           label="Email"
           placeholder="you@email.com"
@@ -41,26 +43,11 @@ export function Login() {
           name="email"
           control={control}
         />
-        <PasswordInput
-          label="Password"
-          placeholder="Your password"
-          mt="md"
-          size="md"
-          withAsterisk
-          name="password"
-          control={control}
-        />
-        <Group position="apart" mt="lg">
-          <Checkbox label="Remember me" control={control} name="remember" />
 
-          <Anchor component={Link} size="sm" to="/auth/forgot-password">
-            Forgot password?
-          </Anchor>
-        </Group>
         <Button fullWidth mt="xl" type="submit">
-          {isLoading ? <Loader variant="dots" color="white" /> : 'Log in'}
+          {isLoading ? <Loader variant="dots" color="white" /> : 'Reset Password'}
         </Button>
       </Paper>
     </Container>
   );
-}
+};

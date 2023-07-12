@@ -5,7 +5,7 @@ import PublicRoute from './public-route';
 
 import { MainLayout } from './layout';
 
-import { Login, Register } from './pages/auth';
+import { Login, Register, ForgotPassword } from './pages/auth';
 import { Home } from './pages/home';
 import { NewTransaction } from './pages/new-transaction';
 import { Wallet } from './pages/wallet';
@@ -43,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: '/auth/register',
         element: <Register />,
+      },
+      {
+        path: '/auth/forgot-password',
+        element: <ForgotPassword />,
       },
     ],
   },

@@ -7,6 +7,7 @@ type CurrentUser = {
   };
 };
 
+// Auth
 type LoginInput = {
   email: string;
   password: string;
@@ -22,6 +23,11 @@ type RegisterInput = {
   phone: number;
 };
 
+type ForgotPasswordInput = {
+  email: string;
+};
+
+// Wallet
 type CreateWalletInput = {
   name: string;
 };
@@ -53,6 +59,7 @@ type CreateTransaction = CreatePaymentInput & {
   receiverName: string;
 };
 
+// Transaction
 type Transaction = {
   amount: number;
   senderName?: string;

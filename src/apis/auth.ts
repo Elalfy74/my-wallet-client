@@ -15,3 +15,7 @@ export function logout() {
 export function checkAuth() {
   return instance.get('/auth/checkauth');
 }
+
+export function forgotPassword(forgotPasswordInput: ForgotPasswordInput) {
+  return instance.post('/auth/forgot-password', forgotPasswordInput);
+}
