@@ -105,7 +105,7 @@ export function MainNavbar({ close }: { close?: () => void }) {
       styles={{
         root: {
           height:
-            'calc(100vh - var(--mantine-header-height, 0rem) - var(--mantine-footer-height, 1.5rem))',
+            'calc(100vh - var(--mantine-header-height, 0rem) - var(--mantine-footer-height, 70px))',
         },
       }}
     >

@@ -1,10 +1,19 @@
-import { Container, Title, Text, Paper, Alert, Button, Loader } from '@mantine/core';
+import { Container, Title, Text, Paper, Alert, Button, Loader, Stack } from '@mantine/core';
 import { PasswordInput } from 'react-hook-form-mantine';
 
 import { useResetPasswordForm } from './useResetPasswordForm';
 
 export const ResetPassword = () => {
-  const { control, handleSubmit, onSubmit, error, isLoading, message } = useResetPasswordForm();
+  const { control, handleSubmit, onSubmit, error, isLoading, message, checkLoading } =
+    useResetPasswordForm();
+
+  if (checkLoading) {
+    return (
+      <Stack my={60} align="center">
+        <Loader />
+      </Stack>
+    );
+  }
 
   return (
     <Container size={500} my={40}>

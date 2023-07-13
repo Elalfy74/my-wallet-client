@@ -1,10 +1,9 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import { useEffect } from 'react';
 
 import { checkResetLink, resetPassword } from '@/apis/auth';
 
@@ -27,9 +26,14 @@ export const useResetPasswordForm = () => {
   const { userId, token } = useParams<Params>();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    checkResetLink(userId!, token!).catch(() => navigate('/'));
-  }, []);
+  const { error: checkError, isLoading: checkLoading } = useQuery({
+    queryFn: () => checkResetLink(userId!, token!),
+    queryKey: ['checkResetLink'],
+  });
+
+  if (checkError) {
+    navigate('/');
+  }
 
   const { control, handleSubmit } = useForm<ResetPasswordInput>({
     resolver: zodResolver(schema),
@@ -56,5 +60,6 @@ export const useResetPasswordForm = () => {
     isLoading,
     message: resData?.data.message,
     error: error instanceof AxiosError && error.response?.data.message,
+    checkLoading,
   };
 };
